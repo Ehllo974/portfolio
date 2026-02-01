@@ -458,6 +458,7 @@
             display: flex;
             gap: 0.8rem;
             margin-top: 1rem;
+            flex-wrap: wrap;
         }
 
         .tech-badge {
@@ -468,6 +469,166 @@
             font-size: 0.8rem;
             color: var(--secondary-cyan);
             font-weight: 500;
+        }
+
+        /* Project Actions */
+        .project-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-view-report, .btn-upload-report {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 212, 255, 0.1));
+            border: 1px solid var(--primary-green);
+            color: var(--primary-green);
+            padding: 0.7rem 1.3rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .btn-upload-report {
+            border-color: var(--secondary-cyan);
+            color: var(--secondary-cyan);
+        }
+
+        .btn-view-report:hover {
+            background: var(--primary-green);
+            color: var(--bg-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+        }
+
+        .btn-upload-report:hover {
+            background: var(--secondary-cyan);
+            color: var(--bg-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 14, 26, 0.95);
+            backdrop-filter: blur(10px);
+            animation: fadeInModal 0.3s ease;
+        }
+
+        @keyframes fadeInModal {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            animation: slideUp 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0, 255, 136, 0.2);
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.05), rgba(0, 212, 255, 0.05));
+        }
+
+        .modal-header h3 {
+            color: var(--primary-green);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 107, 53, 0.2);
+            color: var(--accent-orange);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            flex-grow: 1;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+            height: 70vh;
+            min-height: 500px;
+        }
+
+        .modal-body iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+        }
+
+        .report-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-secondary);
+            gap: 1rem;
+            padding: 3rem;
+        }
+
+        .modal-footer {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid rgba(0, 255, 136, 0.2);
+            display: flex;
+            justify-content: flex-end;
+            background: rgba(10, 14, 26, 0.5);
+        }
+
+        .modal-footer .btn-download {
+            text-decoration: none;
         }
 
         /* Contact Section */
@@ -575,6 +736,25 @@
 
             .cv-viewer {
                 height: 400px;
+            }
+
+            .modal-content {
+                width: 95%;
+                max-height: 95vh;
+            }
+
+            .modal-body {
+                height: 60vh;
+                min-height: 400px;
+            }
+
+            .project-actions {
+                flex-direction: column;
+            }
+
+            .btn-view-report, .btn-upload-report {
+                width: 100%;
+                justify-content: center;
             }
         }
 
@@ -736,7 +916,7 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo">NetAdmin</div>
+                <div class="logo">Portfolio de Hoareau Anthony</div>
                 <ul class="nav-links">
                     <li><a href="#home">Accueil</a></li>
                     <li><a href="#skills">Compétences</a></li>
@@ -753,10 +933,9 @@
         <div class="container">
             <h1 class="hero-title">Administrateur Réseaux</h1>
             <p class="hero-subtitle">INFRASTRUCTURE • SÉCURITÉ • MONITORING</p>
-            <div class="terminal-text typing">
-                <span>Optimisant les architectures réseau depuis 2018</span>
-            </div>
+            
 
+            
         </div>
     </section>
 
@@ -789,7 +968,7 @@
                         <span class="tag">Firewall</span>
                         <span class="tag">VPN IPsec</span>
                         <span class="tag">pfSense</span>
-                        <span class="tag">802.1X</span>
+                        <span class="tag">OPNSense</span>
                     </div>
                 </div>
 
@@ -800,24 +979,9 @@
                         Surveillance proactive des infrastructures avec outils de monitoring et analyse de performance.
                     </p>
                     <div class="skill-tags">
-                        <span class="tag">Zabbix</span>
-                        <span class="tag">Nagios</span>
+                        <span class="tag">Centreon</span>
                         <span class="tag">SNMP</span>
                         <span class="tag">Grafana</span>
-                    </div>
-                </div>
-
-                <div class="skill-card fade-in">
-                    <div class="skill-icon">☁️</div>
-                    <h3 class="skill-title">Cloud & Virtualisation</h3>
-                    <p class="skill-description">
-                        Gestion d'environnements cloud et virtualisation des infrastructures réseau.
-                    </p>
-                    <div class="skill-tags">
-                        <span class="tag">AWS</span>
-                        <span class="tag">Azure</span>
-                        <span class="tag">VMware</span>
-                        <span class="tag">Docker</span>
                     </div>
                 </div>
 
@@ -830,7 +994,6 @@
                     <div class="skill-tags">
                         <span class="tag">Linux</span>
                         <span class="tag">Windows Server</span>
-                        <span class="tag">Ansible</span>
                         <span class="tag">Bash</span>
                     </div>
                 </div>
@@ -896,68 +1059,99 @@
         <div class="container">
             <h2 class="section-title">Projets Réalisés</h2>
             <div class="projects-grid">
-                <div class="project-card fade-in">
+                <div class="project-card fade-in" data-project-id="1">
                     <div class="project-visual">🏢</div>
                     <div class="project-content">
-                        <h3 class="project-title">Refonte Infrastructure Entreprise</h3>
+                        <h3 class="project-title">SIEM Entreprise</h3>
                         <p class="project-description">
-                            Migration complète de l'infrastructure réseau d'une entreprise de 500 employés vers une architecture SD-WAN avec haute disponibilité. Amélioration de la performance de 40% et réduction des coûts de 25%.
+                            Mise en place d'une solution de détection d’intrusion et un SIEM pour surveiller l’ensemble d'une infrastructure.
                         </p>
                         <div class="project-tech">
                             <span class="tech-badge">Cisco Meraki</span>
                             <span class="tech-badge">SD-WAN</span>
                             <span class="tech-badge">MPLS</span>
                         </div>
+                        <div class="project-actions">
+                            <button class="btn-view-report" onclick="openReportModal(1)">
+                                <span class="btn-icon">📄</span>
+                                Voir le compte rendu
+                            </button>
+                            
+                        </div>
                     </div>
                 </div>
 
-                <div class="project-card fade-in">
+                <div class="project-card fade-in" data-project-id="2">
                     <div class="project-visual">🛡️</div>
                     <div class="project-content">
-                        <h3 class="project-title">Système de Sécurité Multi-Couches</h3>
+                        <h3 class="project-title">Audit de Sécurité d'un Serveur Windows 2022</h3>
                         <p class="project-description">
-                            Déploiement d'une solution de sécurité complète incluant firewall nouvelle génération, systèmes IDS/IPS, segmentation réseau et authentification 802.1X pour un campus universitaire.
+                           Analyse complète de vulnérabilités et durcissement. Optimisation des GPO et réduction de la surface d'attaque.
                         </p>
                         <div class="project-tech">
-                            <span class="tech-badge">Fortinet</span>
-                            <span class="tech-badge">Suricata</span>
-                            <span class="tech-badge">RADIUS</span>
+                            <span class="tech-badge">Windows Serveur</span>
+                            <span class="tech-badge">PingCastle</span>
+                        </div>
+                        <div class="project-actions">
+                            <button class="btn-view-report" onclick="openReportModal(2)">
+                                <span class="btn-icon">📄</span>
+                                Voir le compte rendu
+                            </button>
+                            
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card fade-in">
+                <div class="project-card fade-in" data-project-id="3">
                     <div class="project-visual">📈</div>
                     <div class="project-content">
-                        <h3 class="project-title">Plateforme de Monitoring Centralisée</h3>
+                        <h3 class="project-title">Monitoring Centralisée</h3>
                         <p class="project-description">
-                            Mise en place d'une solution de monitoring et d'alerting pour superviser plus de 200 équipements réseau avec dashboards personnalisés et automatisation des rapports.
+                            Mise en place d'une solution de monitoring et d'alerting avec dashboards personnalisés et automatisation.
                         </p>
                         <div class="project-tech">
-                            <span class="tech-badge">Zabbix</span>
+                            <span class="tech-badge">Centreon</span>
                             <span class="tech-badge">Grafana</span>
-                            <span class="tech-badge">InfluxDB</span>
+                            <span class="tech-badge">OPNSense</span>
+                        </div>
+                        <div class="project-actions">
+                            <button class="btn-view-report" onclick="openReportModal(3)">
+                                <span class="btn-icon">📄</span>
+                                Voir le compte rendu
+                            </button>
+                            
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card fade-in">
-                    <div class="project-visual">☁️</div>
-                    <div class="project-content">
-                        <h3 class="project-title">Migration Cloud Hybride</h3>
-                        <p class="project-description">
-                            Conception et implémentation d'une architecture réseau cloud hybride connectant infrastructure on-premise et AWS avec VPN site-to-site et Direct Connect pour la haute disponibilité.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-badge">AWS VPC</span>
-                            <span class="tech-badge">Direct Connect</span>
-                            <span class="tech-badge">Terraform</span>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </section>
+
+    <!-- Modal pour afficher les comptes rendus -->
+    <div id="reportModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Compte Rendu du Projet</h3>
+                <button class="modal-close" onclick="closeReportModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="reportPlaceholder" class="report-placeholder">
+                    <div class="placeholder-icon">📋</div>
+                    <p>Aucun compte rendu chargé pour ce projet</p>
+                    <p class="placeholder-hint">Utilisez le bouton "Ajouter CR" pour charger un document PDF</p>
+                </div>
+                <iframe id="reportFrame" style="display: none;"></iframe>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn-download" id="downloadReport" style="display: none;" download>
+                    <span class="btn-icon">⬇</span>
+                    Télécharger
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- Contact Section -->
     <section id="contact">
@@ -965,20 +1159,16 @@
             <h2 class="section-title">Contact</h2>
             <div class="contact-container">
                 <p style="font-size: 1.2rem; color: var(--text-secondary); position: relative; z-index: 1;">
-                    Intéressé par une collaboration ? N'hésitez pas à me contacter !
+                    N'hésitez pas à me contacter !
                 </p>
                 <div class="contact-info">
                     <div class="contact-item">
-                        <div class="contact-icon">📧</div>
-                        <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8deee2e3f9eceef9cde3e8f9ece9e0e4e3a3fdffe2">[email&#160;protected]</a></span>
-                    </div>
-                    <div class="contact-item">
                         <div class="contact-icon">💼</div>
-                        <span>linkedin.com/in/netadmin</span>
+                        <span>https://www.linkedin.com/in/anthony-hoareau1/</span>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon">🐙</div>
-                        <span>github.com/netadmin</span>
+                        <span>https://github.com/Ehllo974</span>
                     </div>
                 </div>
             </div>
@@ -989,7 +1179,7 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <p>&copy; 2024 NetAdmin Portfolio | Conçu avec passion pour les réseaux</p>
+                <p>&copy; 2026 Portfolio | Conçu avec passion pour les réseaux</p>
                 <p style="margin-top: 0.5rem; font-size: 0.8rem;">
                     <span style="color: var(--primary-green);">System Status:</span> 
                     <span style="color: var(--accent-orange);">ONLINE</span> 
@@ -1130,7 +1320,7 @@
             cvFrame.src = pdfPath;
             cvViewer.classList.add('has-pdf');
             downloadBtn.href = pdfPath;
-            downloadBtn.download = 'CV_HOAREAU_Anthony.pdf';
+            downloadBtn.download = 'CV_Administrateur_Reseaux.pdf';
         }
 
         // INSTRUCTIONS POUR CHARGER VOTRE CV :
@@ -1138,7 +1328,7 @@
         // Méthode 1 - Fichier dans le même dossier :
         // 1. Placez votre fichier CV (par ex: mon-cv.pdf) dans le même dossier que ce fichier HTML
         // 2. Décommentez la ligne suivante et remplacez 'mon-cv.pdf' par le nom de votre fichier
-    loadCVFromURL('CV_2026-02-01_Anthony_HOAREAU.pdf');
+     loadCVFromURL('CV.pdf');
         
         // Méthode 2 - URL externe :
         // Si votre CV est hébergé en ligne (Google Drive, Dropbox, etc.)
@@ -1146,5 +1336,152 @@
         
         // Méthode 3 - Upload manuel :
         // Utilisez simplement le bouton "Charger un CV" sur la page
+
+        // ============================================
+        // GESTION DES COMPTES RENDUS DE PROJETS
+        // ============================================
+
+        // Stockage des comptes rendus (en mémoire)
+        const projectReports = {
+            1: null, // Refonte Infrastructure
+            2: null, // Sécurité Multi-Couches
+            3: null, // Monitoring
+            4: null  // Cloud Hybride
+        };
+
+        // Upload de compte rendu pour un projet
+        document.querySelectorAll('.report-upload').forEach(input => {
+            input.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                const projectId = this.getAttribute('data-project-id');
+                
+                if (file && file.type === 'application/pdf') {
+                    // Révoquer l'ancien URL si existe
+                    if (projectReports[projectId]) {
+                        URL.revokeObjectURL(projectReports[projectId]);
+                    }
+                    
+                    // Créer un nouveau URL pour le fichier
+                    projectReports[projectId] = URL.createObjectURL(file);
+                    
+                    // Feedback visuel
+                    const projectCard = document.querySelector(`[data-project-id="${projectId}"]`);
+                    const viewBtn = projectCard.querySelector('.btn-view-report');
+                    viewBtn.style.borderColor = 'var(--primary-green)';
+                    viewBtn.style.background = 'linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 212, 255, 0.2))';
+                    
+                    // Animation de confirmation
+                    viewBtn.innerHTML = '<span class="btn-icon">✓</span> CR chargé !';
+                    setTimeout(() => {
+                        viewBtn.innerHTML = '<span class="btn-icon">📄</span> Voir le compte rendu';
+                    }, 2000);
+                }
+            });
+        });
+
+        // Ouvrir la modal avec le compte rendu
+        function openReportModal(projectId) {
+            const modal = document.getElementById('reportModal');
+            const reportFrame = document.getElementById('reportFrame');
+            const reportPlaceholder = document.getElementById('reportPlaceholder');
+            const downloadBtn = document.getElementById('downloadReport');
+            const modalTitle = document.getElementById('modalTitle');
+            
+            // Titres des projets
+            const projectTitles = {
+                1: 'SIEM Entreprise',
+                2: "Audit de Sécurité d'un Serveur Windows 2022",
+                3: 'Monitoring Centralisée',
+                4: 'Migration Cloud Hybride'
+            };
+            
+            modalTitle.textContent = `Compte Rendu - ${projectTitles[projectId]}`;
+            
+            // Vérifier si un compte rendu existe
+            if (projectReports[projectId]) {
+                // Afficher le PDF
+                reportFrame.src = projectReports[projectId];
+                reportFrame.style.display = 'block';
+                reportPlaceholder.style.display = 'none';
+                
+                // Configurer le bouton de téléchargement
+                downloadBtn.style.display = 'flex';
+                downloadBtn.href = projectReports[projectId];
+                downloadBtn.download = `CR_Projet_${projectId}_${projectTitles[projectId].replace(/\s/g, '_')}.pdf`;
+                
+                console.log('PDF chargé:', projectReports[projectId]);
+            } else {
+                // Aucun PDF disponible
+                reportFrame.src = '';
+                reportFrame.style.display = 'none';
+                reportPlaceholder.style.display = 'flex';
+                downloadBtn.style.display = 'none';
+                
+                console.log('Aucun compte rendu disponible pour le projet', projectId);
+            }
+            
+            // Ouvrir la modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Empêcher le scroll du body
+        }
+
+        // Fermer la modal
+        function closeReportModal() {
+            const modal = document.getElementById('reportModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = ''; // Restaurer le scroll
+        }
+
+        // Fermer la modal en cliquant en dehors
+        document.getElementById('reportModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeReportModal();
+            }
+        });
+
+        // Fermer avec la touche Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeReportModal();
+            }
+        });
+
+        // ============================================
+        // INSTRUCTIONS POUR CHARGER LES COMPTES RENDUS
+        // ============================================
+        
+        // Méthode 1 - Fichiers dans le même dossier (recommandé) :
+        // Placez vos PDFs dans le même dossier que ce fichier HTML et décommentez :
+        
+        function loadProjectReportsFromFiles() {
+            projectReports[1] = 'SAE.pdf';
+            projectReports[2] = 'Audit_Hoareau_Anthony.pdf';
+            projectReports[3] = 'moni_centralise.pdf';
+            //projectReports[4] = 'projet4-cloud.pdf';
+            
+            // Mettre à jour l'interface
+            document.querySelectorAll('.project-card').forEach(card => {
+                const projectId = card.getAttribute('data-project-id');
+                if (projectReports[projectId]) {
+                    const viewBtn = card.querySelector('.btn-view-report');
+                    viewBtn.style.borderColor = 'var(--primary-green)';
+                    viewBtn.style.background = 'linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 212, 255, 0.2))';
+                }
+            });
+        }
+        
+        // Appeler au chargement de la page
+        window.addEventListener('load', loadProjectReportsFromFiles);
+        
+        
+        // Méthode 2 - URLs externes :
+        // Si vos PDFs sont hébergés en ligne
+        /*
+        projectReports[1] = 'https://votre-url.com/rapport1.pdf';
+        projectReports[2] = 'https://votre-url.com/rapport2.pdf';
+        */
+        
+        // Méthode 3 - Upload manuel (déjà actif) :
+        // Utilisez les boutons "Ajouter CR" sur chaque projet
     </script>
                 
